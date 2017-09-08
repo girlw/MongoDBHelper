@@ -140,7 +140,6 @@ namespace MongoDbHelper
             return database.GetCollection<T>(documentname).Find(filter).Project<T>(fields).ToList();
         }
 
-
         /// <summary>
         /// 通过一个条件获取对象
         /// </summary>
@@ -472,9 +471,13 @@ namespace MongoDbHelper
         }
         #endregion
 
+        /// <summary>
+        /// 有些命令要求你连到系统库上才能执行
+        /// </summary>
         public sealed class MongoCommand
         {
-            public const string ListDatabases = "{'listDatabases':1}";
+            public const string ListDatabases = "{listDatabases:1}";
+            public const string ListCommands = "{ listCommands: 1 }";
         }
     }
 }
