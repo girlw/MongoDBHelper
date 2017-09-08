@@ -61,7 +61,8 @@ namespace MongoDbHelperTest
         [TestMethod()]
         public void IsExistDocumentTest()
         {
-            Assert.Fail();
+            bool exist = db.IsExistDocument<TestEntity>(document,Builders<TestEntity>.Filter.Empty);
+            Debug.WriteLine(exist);
         }
 
         [TestMethod()]
@@ -70,8 +71,6 @@ namespace MongoDbHelperTest
             var filter = Builders<TestEntity>.Filter.Empty;
             long n = db.GetCount<TestEntity>(document, filter);
             Debug.WriteLine(n);
-            //db.GetCount<TestEntity>()
-
         }
 
         [TestMethod()]
@@ -95,7 +94,7 @@ namespace MongoDbHelperTest
             IList<TestEntity> te = db.GetAllDocuments<TestEntity>(document);
             foreach (var item in te)
             {
-                System.Diagnostics.Debug.WriteLine(item.OrderId);
+                Debug.WriteLine(item.OrderId);
             }
         }
 
@@ -104,10 +103,9 @@ namespace MongoDbHelperTest
         {
             var project = Builders<TestEntity>.Projection.Include("OrderId").Include("Note");
             IList<TestEntity> te = db.GetAllDocuments<TestEntity>(document, project);
-
             foreach (var item in te)
             {
-                System.Diagnostics.Debug.WriteLine(item.OrderId);
+                Debug.WriteLine(item.OrderId);
             }
         }
 
@@ -117,26 +115,8 @@ namespace MongoDbHelperTest
             var fields = Builders<TestEntity>.Projection.Include("OrderId").Include("Note");
             var filter = Builders<TestEntity>.Filter.Eq("id", id);
             TestEntity te = db.GetDocumentByUserFilter<TestEntity>(document, filter, fields);
-            System.Diagnostics.Debug.WriteLine(te.OrderId);
+            Debug.WriteLine(te.OrderId);
 
-        }
-
-        [TestMethod()]
-        public void GetAllDocumentsTest()
-        {
-           
-        }
-
-        [TestMethod()]
-        public void GetAllDocumentsTest1()
-        {
-           
-        }
-
-        [TestMethod()]
-        public void GetDocumentsByFilterTest()
-        {
-          
         }
 
         [TestMethod()]
@@ -170,9 +150,7 @@ namespace MongoDbHelperTest
             var t = db.GetDocumentsByFilter<TestEntity>(document, filter, fields);
             foreach (var item in t)
             {
-                Debug.WriteLine(item.OrderId);
-                Debug.WriteLine(item.Note);
-                Debug.WriteLine(item.OrderDate);
+                Debug.WriteLine("OrderId={0}, Note={1}, Qty={2}, i={3};", item.OrderId, item.Note, item.Qty);
             }
         }
 
@@ -183,9 +161,7 @@ namespace MongoDbHelperTest
             var t = db.GetDocumentsByFilter<TestEntity>(document, "Qty", "7", fields);
             foreach (var item in t)
             {
-                Debug.WriteLine(item.OrderId);
-                Debug.WriteLine(item.Note);
-                Debug.WriteLine(item.OrderDate);
+                Debug.WriteLine("OrderId={0}, Note={1}, Qty={2}, i={3};", item.OrderId, item.Note, item.Qty);
             }
         }
 
@@ -196,10 +172,7 @@ namespace MongoDbHelperTest
             int i = 0;
             foreach (var item in t)
             {
-                Debug.WriteLine(item.OrderId);
-                Debug.WriteLine(item.Note);
-                Debug.WriteLine(item.OrderDate);
-                Debug.WriteLine(++i);
+                Debug.WriteLine("OrderId={0}, Note={1}, Qty={2}, i={3};", item.OrderId, item.Note, item.Qty, ++i);
             }
         }
 
@@ -211,10 +184,7 @@ namespace MongoDbHelperTest
             int i = 0;
             foreach (var item in t)
             {
-                Debug.WriteLine(item.OrderId);
-                Debug.WriteLine(item.Note);
-                Debug.WriteLine(item.OrderDate);
-                Debug.WriteLine(++i);
+                Debug.WriteLine("OrderId={0}, Note={1}, Qty={2}, i={3};", item.OrderId, item.Note, item.Qty, ++i);
             }
         }
 
@@ -226,11 +196,7 @@ namespace MongoDbHelperTest
             int i = 0;
             foreach (var item in t)
             {
-                Debug.WriteLine(item.OrderId);
-                Debug.WriteLine(item.Note);
-                Debug.WriteLine(item.OrderDate);
-                Debug.WriteLine("Qty " + item.Qty);
-                Debug.WriteLine(++i);
+                Debug.WriteLine("OrderId={0}, Note={1}, Qty={2}, i={3};", item.OrderId, item.Note, item.Qty, ++i);
             }
         }
 
@@ -285,13 +251,6 @@ namespace MongoDbHelperTest
         {
             TestEntity te = GetEntity();
             db.UpdateReplaceOne<TestEntity>(document, "59a7c35a49b7888ccfd9e187", te);
-        }
-
-
-        [TestMethod()]
-        public void UpdateTest1()
-        {
-            Assert.Fail();
         }
 
         [TestMethod()]

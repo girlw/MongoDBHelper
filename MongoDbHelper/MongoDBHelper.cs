@@ -3,10 +3,12 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 
-//https://docs.mongodb.com/manual/tutorial/update-documents/
-//https://docs.mongodb.com/manual/tutorial/perform-two-phase-commits/
-//https://docs.mongodb.com/manual/reference/command/dropDatabase/index.html
-//https://docs.mongodb.com/manual/reference/command/listCommands/
+/*
+https://docs.mongodb.com/manual/tutorial/update-documents/
+https://docs.mongodb.com/manual/tutorial/perform-two-phase-commits/
+https://docs.mongodb.com/manual/reference/command/dropDatabase/index.html
+https://docs.mongodb.com/manual/reference/command/listCommands/
+*/
 
 namespace MongoDbHelper
 {
@@ -37,6 +39,11 @@ namespace MongoDbHelper
             }
         }
 
+        /// <summary>
+        /// 执行命令，命令请参考MongoCommand,命令太多，不一一展示，传入的就是里面的字符串，有些命令执行需要连接到admin表
+        /// </summary>
+        /// <param name="cmdText"></param>
+        /// <returns></returns>
         public BsonDocument RunCommand(string cmdText)
         {
             return database.RunCommand<BsonDocument>(cmdText);
