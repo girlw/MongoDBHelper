@@ -480,6 +480,7 @@ namespace MongoDbHelper
 
         /// <summary>
         /// 有些命令要求你连到系统库上才能执行
+        /// https://docs.mongodb.com/manual/reference/command/listCommands/
         /// </summary>
         public sealed class MongoCommand
         {
